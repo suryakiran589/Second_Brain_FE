@@ -2,10 +2,10 @@ import axios from "axios";
 
 const API_URL = "http://localhost:3000/api/v1";
 
-export const addContent = async (token: string, title: string, link: string,description:string) => {
+export const addContent = async (token: string, title: string, link: string,description:string,category:string) => {
   const res = await axios.post(
     `${API_URL}/content`,
-    { title, link,description },
+    { title, link,description,category },
     { headers: { authorization: `Bearer ${token}` } }
   );
   return res.data;

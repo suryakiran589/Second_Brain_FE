@@ -10,6 +10,7 @@ export default function Dashboard() {
   const [link, setLink] = useState("");
   const [shareLink, setShareLink] = useState("");
   const [showModal, setShowModal] = useState(false);
+  const [category,setCategory] = useState("")
   const token = localStorage.getItem("token") || "";
   const [brains, setBrains] = useState<Content[]>([]);
   const [refreshTrigger, setRefreshTrigger] = useState(false);
@@ -26,19 +27,19 @@ export default function Dashboard() {
     })();
   }, [refreshTrigger]);
 
-
-    async function handleDelete(id: string) {
-      await deleteContent(id);
-      setRefreshTrigger(!refreshTrigger);
-    }
+  async function handleDelete(id: string) {
+    await deleteContent(id);
+    setRefreshTrigger(!refreshTrigger);
+  }
 
   async function handleAdd() {
     if (!title || !link) return alert("Please fill all fields");
-    await addContent(token, title, link,description);
-    alert("Content added"); 
+    await addContent(token, title, link, description,category);
+    alert("Content added");
     setTitle("");
     setLink("");
-    setDescription("")
+    setCategory("")
+    setDescription("");
     setShowModal(false);
     setRefreshTrigger(!refreshTrigger);
   }
@@ -57,12 +58,12 @@ export default function Dashboard() {
         <div className="flex gap-3">
           <button
             onClick={() => setShowModal(true)}
-            className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg font-semibold"
+            className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg font-semibold cursor-pointer"
           >
             + Add Brain
           </button>
           <button
-            className={`px-4 py-2 rounded-lg font-semibold ${
+            className={`px-4 py-2 rounded-lg font-semibold cursor-pointer ${
               shareLink
                 ? "bg-red-500 hover:bg-red-600 text-white"
                 : "bg-purple-600 hover:bg-purple-700 text-white"
@@ -74,31 +75,13 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* Shared Link */}
-      {shareLink && (
-        <div className="bg-purple-100 p-4 rounded-lg mb-6">
-          <p className="text-sm">
-            Public link:{" "}
-            <a
-              href={`/brain/${shareLink}`}
-              className="text-purple-700 font-medium underline"
-            >
-              {window.location.origin}/brain/{shareLink}
-            </a>
-          </p>
-        </div>
-      )}
+      
 
       {/* Brain List */}
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {/* Example brain card */}
-        {/* <div className="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
-          <h3 className="text-lg font-semibold">Example Brain</h3>
-          <p className="text-gray-500 text-sm mt-2">
-            Created on: {new Date().toLocaleDateString()}
-          </p>
-        </div> */}
+
         {brains.map((brain) => (
+          
           <ContentCard
             key={brain._id}
             id={brain._id}
@@ -107,10 +90,11 @@ export default function Dashboard() {
             description={brain.description}
             createdAt={brain.createdAt}
             onDelete={handleDelete}
-            refresh={()=>{
+            category={brain.category}
+            refresh={() => {
               setRefreshTrigger(!refreshTrigger);
             }}
-          />
+            />
         ))}
       </div>
 
@@ -131,12 +115,23 @@ export default function Dashboard() {
               value={link}
               onChange={(e) => setLink(e.target.value)}
             />
-            <input
+            <textarea
               className="border p-2 w-full mb-3 rounded"
               placeholder="Description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
+            <select
+              className="border p-3 w-full mb-3 rounded-lg"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+            >
+              <option value="">Select Category</option>
+              <option value="math">Math</option>
+              <option value="science">Science</option>
+              <option value="coding">Coding</option>
+            </select>
+
             <div className="flex justify-end gap-3">
               <button
                 className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
@@ -148,7 +143,7 @@ export default function Dashboard() {
                 className="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700"
                 onClick={handleAdd}
               >
-                Save 
+                Save
               </button>
             </div>
           </div>

@@ -21,5 +21,5 @@ export interface Content {
   link:string;
   description:string;
   createdAt:string
-  
+  category:string
 }

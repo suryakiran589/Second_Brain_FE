@@ -32,7 +32,7 @@ const EditForm = ({title,link,description,onCancel,onAdd,id,refresh}:EditFormPro
     <div>
       <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center z-50">
           <div className="bg-white p-6 rounded-lg w-full max-w-md">
-            <h2 className="text-xl font-bold mb-4">Add New Brain</h2>
+            <h2 className="text-xl font-bold mb-4">Edit Brain</h2>
             <input
               className="border p-2 w-full mb-3 rounded"
               placeholder="Title"

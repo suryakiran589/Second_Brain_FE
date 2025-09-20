@@ -4,7 +4,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Login from "./pages/Login";
 import SignUp from "./components/SignUp";
 import Dashboard from "./pages/Dashboard";
-import PublicBrain from "./pages/PublicBrain";
+import BrainDetails from "./components/BrainDetails";
 import {  useState } from "react";
 import { AuthContext } from "./Contexts/authContext";
 
@@ -40,7 +40,7 @@ export default function App() {
         <Route path="/" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/brain/:shareLink" element={<PublicBrain />} />
+        <Route path="/brain/:id" element={<BrainDetails />} />
       </Routes>
     </AuthProvider>
     </BrowserRouter>
