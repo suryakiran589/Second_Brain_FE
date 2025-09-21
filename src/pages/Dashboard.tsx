@@ -1,14 +1,11 @@
 import { useEffect, useState } from "react";
 import { addContent, deleteContent, getUserContent } from "../api/ContentApi";
-// import  from "jsonwebtoken";
-import { toggleShare } from "../api/shareApi";
 import ContentCard from "../components/ContentCard";
 import type { Content } from "../types";
 
 export default function Dashboard() {
   const [title, setTitle] = useState("");
   const [link, setLink] = useState("");
-  const [shareLink, setShareLink] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [category,setCategory] = useState("")
   const token = localStorage.getItem("token") || "";
@@ -44,11 +41,7 @@ export default function Dashboard() {
     setRefreshTrigger(!refreshTrigger);
   }
 
-  const handleShareToggle = async () => {
-    const data = await toggleShare(token, shareLink === "");
-    if (data.hash) setShareLink(data.hash);
-    else setShareLink("");
-  };
+
 
   return (
     <div className="p-6 max-w-5xl mx-auto">
@@ -62,16 +55,7 @@ export default function Dashboard() {
           >
             + Add Brain
           </button>
-          <button
-            className={`px-4 py-2 rounded-lg font-semibold cursor-pointer ${
-              shareLink
-                ? "bg-red-500 hover:bg-red-600 text-white"
-                : "bg-purple-600 hover:bg-purple-700 text-white"
-            }`}
-            onClick={handleShareToggle}
-          >
-            {shareLink ? "Unshare Brain" : "Share Brain"}
-          </button>
+          
         </div>
       </div>
 

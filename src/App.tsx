@@ -8,6 +8,8 @@ import BrainDetails from "./components/BrainDetails";
 import {  useState } from "react";
 import { AuthContext } from "./Contexts/authContext";
 
+import PublicBrainDetails from "./components/PublicBrainDetails";
+
 export default function App() {
 
  
@@ -41,6 +43,7 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/brain/:id" element={<BrainDetails />} />
+        <Route path="/brain/public/:hash" element={<PublicBrainDetails/>}></Route>
       </Routes>
     </AuthProvider>
     </BrowserRouter>

@@ -1,11 +1,11 @@
 import axios from "axios";
 
 const API_URL = "http://localhost:3000";
-
-export const toggleShare = async (token: string, share: boolean) => {
+//@ts-ignore
+export const toggleShare = async (token: string,id, share: boolean) => {
   const res = await axios.post(
-    `${API_URL}/brain/share`,
-    { share },
+    `${API_URL}/api/v1/content/brain/share`,
+    { share ,id},
     { headers: { Authorization: `Bearer ${token}` } }
   );
   return res.data;
