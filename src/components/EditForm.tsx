@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { addContent, updateContent } from "../api/ContentApi"
+import {  updateContent } from "../api/ContentApi"
 import { useAuth } from "../Contexts/authContext"
 
 interface EditFormProps{
@@ -7,12 +7,12 @@ interface EditFormProps{
     link:string,
     description:string,
     onCancel:()=>void,
-    onAdd:()=>void,
+  
     id:string,
     refresh:()=>void
 }
 
-const EditForm = ({title,link,description,onCancel,onAdd,id,refresh}:EditFormProps) => {
+const EditForm = ({title,link,description,onCancel,id,refresh}:EditFormProps) => {
     const [editTitle,setEditTitle]=useState(title)
     const [editLink,setEditLink]=useState(link)
     const [editDesc,setEditDesc]=useState(description)

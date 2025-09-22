@@ -23,7 +23,7 @@ export default function ContentCard({
   createdAt, 
   category,
   onDelete, 
-  onEdit ,refresh
+   refresh
 }: Props) {
   const [isDeleting, setIsDeleting] = useState(false);
   const [deleteError, setDeleteError] = useState<string | null>(null);
@@ -145,7 +145,7 @@ export default function ContentCard({
           link={link}
           description={description}
             
-          onAdd={() => {}}
+          
           onCancel={() => {
             setEditForm(false);
           }}

@@ -79,6 +79,9 @@ export default function Login() {
             type="submit"
             disabled={loading}
             className="w-full py-2 px-4 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg font-semibold transition duration-300"
+            onClick={() =>{
+              setLoading(true)
+            }}
           >
             {loading ? "Logging in..." : "Login"}
           </button>
